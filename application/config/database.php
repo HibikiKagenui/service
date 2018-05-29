@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'service_motor',
+	'hostname' => 'cs-upi-16.com',
+	'username' => 'csupicom',
+	'password' => 'rahasiaku123',
+	'database' => 'csupicom_service_abel',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
