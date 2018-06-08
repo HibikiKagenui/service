@@ -1,16 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ServiceTransactionDetail extends CI_Model
+class Mechanic extends CI_Model
 {
     var $table;
     function __construct() {
         parent::__construct();
-        $this->table = 'service_transaction_details';
+        $this->table = 'mechanics';
     }
     
-    function get($xid_transaction) {
-        $this->db->where('xid_transaction', $xid_transaction);
+    function get_all() {
         $this->db->select('*');
         $data = $this->db->get($this->table);
         
@@ -20,17 +19,25 @@ class ServiceTransactionDetail extends CI_Model
             return null;
         }
     }
-
+    
+    function get($id) {
+        $this->db->where('id', $id);        
+        $this->db->select('*');
+        $data = $this->db->get($this->table);
+        
+        if ($data->num_rows() > 0) {
+            return $data->result();
+        } else {
+            return null;
+        }
+    }
+    
+    
     function insert($data) {
-        if($this->db->insert($this->table, $data)) {
+        if ($this->db->insert($this->table, $data)) {
             return true;
         } else {
             return false;
         }
-    }
-
-    function delete($xid_transaction) {
-        $this->db->where('xid_transaction', $xid_transaction);
-        $this->db->delete($this->table);
     }
 }

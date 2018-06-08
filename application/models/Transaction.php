@@ -32,4 +32,21 @@ class Transaction extends CI_Model
             return false;
         }
     }
+
+    function set_done($id) {
+        $this->db->set('status', 'done');
+        $this->db->where('id', $id);
+        $this->db->update($this->table);
+    }
+
+    function set_jenis($id, $jenis_kendaraan) {
+        $this->db->set('jenis_kendaraan', $jenis_kendaraan);
+        $this->db->where('id', $id);
+        $this->db->update($this->table);        
+    }
+
+    function delete($id) {
+        $this->db->where('id', $id);
+        $this->db->delete($this->table);
+    }
 }

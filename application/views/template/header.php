@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Result</title>
+	<title>Panel Kasir</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width = device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/custom.css">
-	<script defer src="js/fontawesome-all.js"></script>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">
+	<!-- FontAwesome -->
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+	<!-- JBox
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://code.jboxcdn.com/0.4.9/jBox.min.js"></script>
+	<link href="https://code.jboxcdn.com/0.4.9/jBox.css" rel="stylesheet">
+	<script>
+		var tooltip = new jBox('Tooltip', {attach: '.tooltip'});
+		tooltip.attach();
+	</script> -->
 	<style>
 		.navbar-header {
 			float: left;
@@ -14,25 +23,21 @@
 			text-align: center;
 			width: 100%;
 		}
-		.navbar-brand {float:none;}
+		.navbar-brand {
+			float:none;
+		}
+		body {
+			background-color: whitesmoke;
+		}
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav class="navbar navbar-expand-lg navbar-light bg-white">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="<?php echo site_url() ?>">Navbar</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<?php if($this->session->userdata('isLoggedIn')) { ?>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto"></ul>
-					<span class="navbar-text">
-						Welcome, <?php echo $this->session->userdata('nama') ?>
-					</span>
-					<a class="btn btn-primary my-2 my-sm-0 mx-2" href="<?php echo site_url('process/logout')?>">Logout</a>
-				</div>
-			<?php } ?>
+			<a class="navbar-brand" href="<?php echo site_url() ?>">
+				<img src="<?php echo site_url('assets/img/logo.png') ?>" class="d-inline-block align-top" alt="">
+			</a>
 		</div>
 	</nav>
-	<div class="container p-5 m-auto">
+	<div class="container-fluid p-5 m-auto">
+		<div class="row">
