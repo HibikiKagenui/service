@@ -31,19 +31,21 @@
 				</tr>
 				<?php
 				$i = 1;
-				foreach($part as $row) { ?>
-					<tr>
-						<th scope="row"><?php echo $i++ ?></th>
-						<td class="text-uppercase"><?php echo $row->id ?></td>
-						<td><?php echo $row->nama ?></td>
-						<td><?php echo $row->harga ?></td>
-						<td><?php echo $row->stok ?></td>
-						<td>
-							<a class="btn btn-sm btn-success" title="Rincian Stok" href=""><i class="fas fa-list-ol"></i></a>
-							<a class="btn btn-sm btn-primary" title="Ubah "href=""><i class="fas fa-edit"></i></a>
-						</td>
-					</tr>
-				<?php } ?>
+				if ($part != null) {
+				    foreach($part as $row) { ?>
+                        <tr>
+                            <th scope="row"><?php echo $i++ ?></th>
+                            <td class="text-uppercase"><?php echo $row->id ?></td>
+                            <td><?php echo $row->nama ?></td>
+                            <td><?php echo $row->harga ?></td>
+                            <td><?php echo $row->stok ?></td>
+                            <td>
+                                <a class="btn btn-sm btn-success" title="Rincian Stok" href=""><i class="fas fa-list-ol"></i></a>
+                                <a class="btn btn-sm btn-primary" title="Ubah "href=""><i class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    <?php }
+                } ?>
 			</tbody>
 		</table>
 	</div>

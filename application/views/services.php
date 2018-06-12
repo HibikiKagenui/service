@@ -29,18 +29,20 @@
 				</tr>
 				<?php
 				$i = 1;
-				foreach($service as $row) { ?>
-					<tr>
-						<th scope="row"><?php echo $i++ ?></th>
-						<td class="text-uppercase"><?php echo $row->id ?></td>
-						<td><?php echo $row->nama ?></td>
-						<td><?php echo $row->biaya ?></td>
-						<td>
-							<a class="btn btn-sm btn-primary" title="Ubah" href=""><i class="fas fa-edit"></i></a>
-							<!-- <a class="btn btn-sm btn-danger" href=""><i class="fas fa-trash-alt"></i></a> -->
-						</td>
-					</tr>
-				<?php } ?>
+				if ($service != null) {
+				    foreach($service as $row) { ?>
+                        <tr>
+                            <th scope="row"><?php echo $i++ ?></th>
+                            <td class="text-uppercase"><?php echo $row->id ?></td>
+                            <td><?php echo $row->nama ?></td>
+                            <td><?php echo $row->biaya ?></td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" title="Ubah" href=""><i class="fas fa-edit"></i></a>
+                                <!-- <a class="btn btn-sm btn-danger" href=""><i class="fas fa-trash-alt"></i></a> -->
+                            </td>
+                        </tr>
+                    <?php }
+                } ?>
 			</tbody>
 		</table>
 	</div>

@@ -31,8 +31,7 @@ class Mechanic extends CI_Model
             return null;
         }
     }
-    
-    
+
     function insert($data) {
         if ($this->db->insert($this->table, $data)) {
             return true;

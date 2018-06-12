@@ -1,50 +1,56 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Process extends CI_Controller {
-    function __construct() {
+class Process extends CI_Controller
+{
+    function __construct()
+    {
         parent::__construct();
         $this->load->model('user');
         $this->load->model('customer');
         $this->load->model('part');
         $this->load->model('service');
         $this->load->model('transaction');
+        $this->load->model('mechanic');
     }
-    
-    function login() {
+
+    function login()
+    {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-        
-		$record = $this->user->login($username,$password);
-		
-		if ($record) {
-			$row = $record->row();
-			$arSession = [
-				'isLoggedIn' => TRUE,
-				'username' => $row->username,
+
+        $record = $this->user->login($username, $password);
+
+        if ($record) {
+            $row = $record->row();
+            $arSession = [
+                'isLoggedIn' => TRUE,
+                'username' => $row->username,
                 'password' => $row->password,
                 'nama' => $row->nama,
                 'jabatan' => $row->jabatan
-			];
-			
-			$this->session->set_userdata($arSession);
-		}
+            ];
+
+            $this->session->set_userdata($arSession);
+        }
         redirect(site_url());
     }
-    
-    function logout() {
+
+    function logout()
+    {
         $this->session->sess_destroy();
         redirect(site_url());
     }
-    
-    function insert_customer() {
+
+    function insert_customer()
+    {
         $id = uniqid('CST-');
         $nama = $this->input->post('nama');
         $no_ktp = $this->input->post('no_ktp');
         $alamat = $this->input->post('alamat');
         $no_kontak = $this->input->post('no_kontak');
         $gender = $this->input->post('gender');
-        
+
         $data = [
             'id' => $id,
             'nama' => $nama,
@@ -53,15 +59,16 @@ class Process extends CI_Controller {
             'no_kontak' => $no_kontak,
             'gender' => $gender
         ];
-        
+
         if ($this->customer->insert($data)) {
             echo 'Sukses';
         }
-        
+
         redirect(site_url());
     }
 
-    function insert_part() {
+    function insert_part()
+    {
         $id = uniqid('PRT-');
         $nama = $this->input->post('nama');
         $harga = $this->input->post('harga');
@@ -77,11 +84,12 @@ class Process extends CI_Controller {
         if ($this->part->insert($data)) {
             echo 'Sukses';
         }
-        
+
         redirect(site_url('site/parts'));
     }
 
-    function insert_service() {
+    function insert_service()
+    {
         $id = uniqid('SRV-');
         $nama = $this->input->post('nama');
         $biaya = $this->input->post('biaya');
@@ -95,11 +103,39 @@ class Process extends CI_Controller {
         if ($this->service->insert($data)) {
             echo 'Sukses';
         }
-        
+
         redirect(site_url('site/services'));
     }
 
-    function new_transaction() {
+    function insert_mechanic()
+    {
+        $id = uniqid('MEK-');
+        $nama = $this->input->post('nama');
+        $alamat = $this->input->post('alamat');
+        $no_kontak = $this->input->post('no_kontak');
+        $gender = $this->input->post('gender');
+        $gaji = $this->input->post('gaji');
+        $jumlah_servis = 0;
+
+        $data = [
+            'id' => $id,
+            'nama' => $nama,
+            'alamat' => $alamat,
+            'no_kontak' => $no_kontak,
+            'gender' => $gender,
+            'gaji' => $gaji,
+            'jumlah_servis' => $jumlah_servis
+        ];
+
+        if ($this->mechanic->insert($data)) {
+            echo 'Sukses';
+        }
+
+        redirect(site_url('site/mechanics'));
+    }
+
+    function new_transaction()
+    {
         // get id customer
         $xid_customer = $this->input->get('id');
         // auto generate transaction id
@@ -113,7 +149,7 @@ class Process extends CI_Controller {
         $jumlah_terbayar = 0;
         // set status = pending
         $status = 'pending';
-        
+
         $data = [
             'id' => $id,
             'jenis_kendaraan' => $jenis_kendaraan,
@@ -122,9 +158,9 @@ class Process extends CI_Controller {
             'status' => $status,
             'xid_customer' => $xid_customer
         ];
-        
+
         // insert
-        if($this->transaction->insert($data)) {
+        if ($this->transaction->insert($data)) {
             echo 'Sukses';
             $arr = [
                 'processingTransaction' => true,
@@ -132,7 +168,7 @@ class Process extends CI_Controller {
                 'waktu' => $waktu,
                 'xid_customer' => $xid_customer
             ];
-            $this->session->set_userdata($arr);            
+            $this->session->set_userdata($arr);
             redirect(site_url('transactions/new'));
         } else {
             echo 'Gagal';

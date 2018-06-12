@@ -3,19 +3,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Site extends CI_Controller
 {
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->load->model('customer');
         $this->load->model('part');
         $this->load->model('service');
+        $this->load->model('mechanic');
     }
-    
-    function index() {
+
+    function index()
+    {
         redirect('site/login');
     }
-    
-    function login() {
-        if($this->session->userdata('isLoggedIn')) {
+
+    function login()
+    {
+        if ($this->session->userdata('isLoggedIn')) {
             redirect(site_url('site/home'));
         } else {
             $this->load->view('template/header');
@@ -23,10 +27,12 @@ class Site extends CI_Controller
             $this->load->view('template/footer');
         }
     }
-    
-    function home() {
-        if($this->session->userdata('isLoggedIn')) {
+
+    function home()
+    {
+        if ($this->session->userdata('isLoggedIn')) {
             $data['customer'] = $this->customer->get_all();
+            $data['customer_id'] = $this->customer->get_all_id();
             $this->load->view('template/header');
             $this->load->view('template/sidebar');
             $this->load->view('home', $data);
@@ -35,9 +41,23 @@ class Site extends CI_Controller
             redirect(site_url('site/login'));
         }
     }
-    
-    function parts() {
-        if($this->session->userdata('isLoggedIn')) {
+
+    function customers()
+    {
+        if ($this->session->userdata('isLoggedIn')) {
+            $data['customer'] = $this->customer->get_all();
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar');
+            $this->load->view('customers', $data);
+            $this->load->view('template/footer');
+        } else {
+            redirect(site_url('site/login'));
+        }
+    }
+
+    function parts()
+    {
+        if ($this->session->userdata('isLoggedIn')) {
             $data['part'] = $this->part->get_all();
             $this->load->view('template/header');
             $this->load->view('template/sidebar');
@@ -47,9 +67,10 @@ class Site extends CI_Controller
             redirect(site_url('site/login'));
         }
     }
-    
-    function services() {
-        if($this->session->userdata('isLoggedIn')) {
+
+    function services()
+    {
+        if ($this->session->userdata('isLoggedIn')) {
             $data['service'] = $this->service->get_all();
             $this->load->view('template/header');
             $this->load->view('template/sidebar');
@@ -60,18 +81,21 @@ class Site extends CI_Controller
         }
     }
 
-    function mechanics() {
-        if($this->session->userdata('isLoggedIn')) {
+    function mechanics()
+    {
+        if ($this->session->userdata('isLoggedIn')) {
+            $data['mechanic'] = $this->mechanic->get_all();
             $this->load->view('template/header');
             $this->load->view('template/sidebar');
-            $this->load->view('mechanics');
+            $this->load->view('mechanics', $data);
             $this->load->view('template/footer');
         } else {
             redirect(site_url('site/login'));
         }
     }
-    
-    function testing() {
+
+    function testing()
+    {
         echo uniqid('TRN');
     }
 }
