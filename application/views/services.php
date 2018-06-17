@@ -37,7 +37,7 @@
                             <td><?php echo $row->nama ?></td>
                             <td><?php echo $row->biaya ?></td>
                             <td>
-                                <a class="btn btn-sm btn-primary" title="Ubah" href=""><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-sm btn-primary" title="Ubah" href="<?php echo site_url('site/update_service?id=' . $row->id)?>"><i class="fas fa-edit"></i></a>
                                 <!-- <a class="btn btn-sm btn-danger" href=""><i class="fas fa-trash-alt"></i></a> -->
                             </td>
                         </tr>

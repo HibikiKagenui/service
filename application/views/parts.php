@@ -18,14 +18,14 @@
 						<td></td>
 						<td></td>
 						<td>
-							<input class="form-control form-control-sm mt-1" type="text" placeholder="Nama" name="nama">
+							<input class="form-control form-control-sm" type="text" placeholder="Nama" name="nama">
 						</td>
 						<td>
-							<input class="form-control form-control-sm mt-1" type="number" placeholder="Harga" name="harga">
+							<input class="form-control form-control-sm" type="number" placeholder="Harga" name="harga">
 						</td>
 						<td></td>
 						<td>
-							<input type="submit" class="btn btn-primary btn-sm mt-1" value="Tambah">
+							<input type="submit" class="btn btn-primary btn-sm" value="Tambah">
 						</td>
 					</form>
 				</tr>
@@ -41,7 +41,7 @@
                             <td><?php echo $row->stok ?></td>
                             <td>
                                 <a class="btn btn-sm btn-success" title="Rincian Stok" href=""><i class="fas fa-list-ol"></i></a>
-                                <a class="btn btn-sm btn-primary" title="Ubah "href=""><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-sm btn-primary" title="Ubah "href="<?php echo site_url('site/update_part?id=' . $row->id) ?>"><i class="fas fa-edit"></i></a>
                             </td>
                         </tr>
                     <?php }

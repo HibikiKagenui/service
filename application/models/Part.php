@@ -4,12 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Part extends CI_Model
 {
     var $table;
-    function __construct() {
+
+    function __construct()
+    {
         parent::__construct();
         $this->table = 'parts';
     }
 
-    function get_all() {
+    function get_all()
+    {
         $this->db->select('*');
         $data = $this->db->get($this->table);
 
@@ -20,8 +23,32 @@ class Part extends CI_Model
         }
     }
 
-    function insert($data) {
+    function get($id)
+    {
+        $this->db->select('*');
+        $this->db->where('id', $id);
+        $data = $this->db->get($this->table);
+
+        if ($data->num_rows() > 0) {
+            return $data->result();
+        } else {
+            return null;
+        }
+    }
+
+    function insert($data)
+    {
         if ($this->db->insert($this->table, $data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function update($id, $data)
+    {
+        $this->db->where('id', $id);
+        if ($this->db->update($this->table, $data)) {
             return true;
         } else {
             return false;

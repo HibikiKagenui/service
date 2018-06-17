@@ -3,12 +3,12 @@
     <table class="table table-bordered table-hover table-sm mt-3">
         <thead class="thead-dark">
         <tr>
-            <!-- <th scope="col">#</th> -->
+            <th scope="col">#</th>
             <th scope="col">ID</th>
             <th scope="col">Nama</th>
             <th scope="col">No. KTP</th>
             <th scope="col">Alamat</th>
-            <th scope="col">No. Tlp</th>
+            <th scope="col">No. Kontak</th>
             <th scope="col">Gender</th>
             <th scope="col">Pilihan</th>
         </tr>
@@ -16,6 +16,7 @@
         <tbody>
         <form action="<?php echo site_url('process/insert_customer') ?>" method="POST">
             <tr>
+                <td></td>
                 <td></td>
                 <td>
                     <input class="form-control form-control-sm" type="text" placeholder="Nama Lengkap" name="nama">
@@ -46,7 +47,7 @@
         if ($customer != null) {
             foreach ($customer as $row) { ?>
                 <tr>
-                    <!-- <th scope="row"><?php echo $i++ ?></th> -->
+                    <th scope="row"><?php echo $i++ ?></th>
                     <td class="text-uppercase"><?php echo $row->id ?></td>
                     <td><?php echo $row->nama ?></td>
                     <td><?php echo $row->no_ktp ?></td>
@@ -56,7 +57,7 @@
                     <td>
                         <!--<a class="btn btn-sm btn-success" title="Transaksi Baru" href="-->
                         <?php //echo site_url('process/new_transaction?id='.$row->id) ?><!--"><i class="fas fa-shopping-cart"></i></a>-->
-                        <a class="btn btn-sm btn-primary" title="Ubah" href=""><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-sm btn-primary" title="Ubah" href="<?php echo site_url('site/update_customer?id='.$row->id)?>"><i class="fas fa-edit"></i></a>
                         <!-- <a class="btn btn-danger" href=""><i class="fas fa-trash-alt"></i></a> -->
                     </td>
                 </tr>

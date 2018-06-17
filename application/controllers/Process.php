@@ -67,6 +67,31 @@ class Process extends CI_Controller
         redirect(site_url());
     }
 
+    function update_customer()
+    {
+        $id = $this->input->post('id');
+        $nama = $this->input->post('nama');
+        $no_ktp = $this->input->post('no_ktp');
+        $alamat = $this->input->post('alamat');
+        $no_kontak = $this->input->post('no_kontak');
+        $gender = $this->input->post('gender');
+
+        $data = [
+            'id' => $id,
+            'nama' => $nama,
+            'no_ktp' => $no_ktp,
+            'alamat' => $alamat,
+            'no_kontak' => $no_kontak,
+            'gender' => $gender
+        ];
+
+        if ($this->customer->update($id, $data)) {
+            echo 'Sukses';
+        }
+
+        redirect(site_url('site/customers'));
+    }
+
     function insert_part()
     {
         $id = uniqid('PRT-');
@@ -88,6 +113,27 @@ class Process extends CI_Controller
         redirect(site_url('site/parts'));
     }
 
+    function update_part()
+    {
+        $id = $this->input->post('id');
+        $nama = $this->input->post('nama');
+        $harga = $this->input->post('harga');
+        $stok = $this->input->post('stok');
+
+        $data = [
+            'id' => $id,
+            'nama' => $nama,
+            'harga' => $harga,
+            'stok' => $stok
+        ];
+
+        if ($this->part->update($id, $data)) {
+            echo 'Sukses';
+        }
+
+        redirect(site_url('site/parts'));
+    }
+
     function insert_service()
     {
         $id = uniqid('SRV-');
@@ -101,6 +147,25 @@ class Process extends CI_Controller
         ];
 
         if ($this->service->insert($data)) {
+            echo 'Sukses';
+        }
+
+        redirect(site_url('site/services'));
+    }
+
+    function update_service()
+    {
+        $id = $this->input->post('id');
+        $nama = $this->input->post('nama');
+        $biaya = $this->input->post('biaya');
+
+        $data = [
+            'id' => $id,
+            'nama' => $nama,
+            'biaya' => $biaya
+        ];
+
+        if ($this->service->update($id, $data)) {
             echo 'Sukses';
         }
 
@@ -134,26 +199,59 @@ class Process extends CI_Controller
         redirect(site_url('site/mechanics'));
     }
 
+    function update_mechanic()
+    {
+        $id = $this->input->post('id');
+        $nama = $this->input->post('nama');
+        $alamat = $this->input->post('alamat');
+        $no_kontak = $this->input->post('no_kontak');
+        $gender = $this->input->post('gender');
+        $gaji = $this->input->post('gaji');
+        $jumlah_servis = $this->input->post('jumlah_servis');
+
+        $data = [
+            'id' => $id,
+            'nama' => $nama,
+            'alamat' => $alamat,
+            'no_kontak' => $no_kontak,
+            'gender' => $gender,
+            'gaji' => $gaji,
+            'jumlah_servis' => $jumlah_servis
+        ];
+
+        if ($this->mechanic->update($id, $data)) {
+            echo 'Sukses';
+        }
+
+        redirect(site_url('site/mechanics'));
+    }
+
     function new_transaction()
     {
-        // get id customer
-        $xid_customer = $this->input->get('id');
         // auto generate transaction id
         $id = uniqid('TRN-');
         // get jenis kendaraan
-        $jenis_kendaraan = '-';
-        // set waktu
+        $jenis_kendaraan = $this->input->post('jenis_kendaraan');
+        // nomor polisi
+        $nomor_polisi = $this->input->post('nomor_polisi');
+        // keluhan
+        $keluhan = $this->input->post('keluhan');
+        // set waktu mulai
         date_default_timezone_set('Asia/Jakarta');
-        $waktu = date('Y-m-d H:i:s', time());
+        $waktu_mulai = date('Y-m-d H:i:s', time());
         // set jumlah terbayar = 0
         $jumlah_terbayar = 0;
         // set status = pending
         $status = 'pending';
+        // get id customer
+        $xid_customer = $this->input->post('id');
 
         $data = [
             'id' => $id,
             'jenis_kendaraan' => $jenis_kendaraan,
-            'waktu' => $waktu,
+            'nomor_polisi' => $nomor_polisi,
+            'keluhan' => $keluhan,
+            'waktu_mulai' => $waktu_mulai,
             'jumlah_terbayar' => $jumlah_terbayar,
             'status' => $status,
             'xid_customer' => $xid_customer
@@ -165,7 +263,7 @@ class Process extends CI_Controller
             $arr = [
                 'processingTransaction' => true,
                 'id' => $id,
-                'waktu' => $waktu,
+                'waktu' => $waktu_mulai,
                 'xid_customer' => $xid_customer
             ];
             $this->session->set_userdata($arr);

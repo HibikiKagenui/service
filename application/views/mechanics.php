@@ -48,14 +48,14 @@
                     foreach ($mechanic as $row) { ?>
                         <tr>
                             <th scope="row"><?php echo $i++ ?></th>
-                            <td><?php echo $row->id ?></td>
+                            <td class="text-uppercase"><?php echo $row->id ?></td>
                             <td><?php echo $row->nama ?></td>
                             <td><?php echo $row->alamat ?></td>
                             <td><?php echo $row->no_kontak ?></td>
                             <td><?php echo $row->gender ?></td>
                             <td><?php echo $row->gaji ?></td>
                             <td><?php echo $row->jumlah_servis ?></td>
-                            <td><a href="" class="btn btn-sm btn-primary" title="Ubah"><i class="fas fa-edit"></i></a></td>
+                            <td><a class="btn btn-sm btn-primary" title="Ubah" href="<?php echo site_url('site/update_mechanic?id=' . $row->id)?>"><i class="fas fa-edit"></i></a></td>
                         </tr>
                     <?php }
                 } ?>
