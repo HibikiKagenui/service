@@ -8,8 +8,10 @@ class Site extends CI_Controller
         parent::__construct();
         $this->load->model('customer');
         $this->load->model('part');
+        $this->load->model('partdetail');
         $this->load->model('service');
         $this->load->model('mechanic');
+        $this->load->model('transaction');
     }
 
     function index()
@@ -31,8 +33,7 @@ class Site extends CI_Controller
     function home()
     {
         if ($this->session->userdata('isLoggedIn')) {
-            $data['customer'] = $this->customer->get_all();
-            $data['customer_id'] = $this->customer->get_all_id();
+            $data['customers'] = $this->customer->get_all();
             $this->load->view('template/header');
             $this->load->view('template/sidebar');
             $this->load->view('home', $data);
@@ -102,6 +103,48 @@ class Site extends CI_Controller
                     $this->load->view('template/header');
                     $this->load->view('template/sidebar');
                     $this->load->view('update_part', $data);
+                    $this->load->view('template/footer');
+                } else {
+                    redirect(site_url());
+                }
+            } else {
+                redirect(site_url());
+            }
+        } else {
+            redirect(site_url());
+        }
+    }
+
+    function part_details()
+    {
+        if ($this->session->userdata('isLoggedIn')) {
+            $id = $this->input->get('id');
+            if ($id != null) {
+                $data['part'] = $this->partdetail->get($id);
+                $data['id'] = $id;
+                $this->load->view('template/header');
+                $this->load->view('template/sidebar');
+                $this->load->view('part_details', $data);
+                $this->load->view('template/footer');
+            } else {
+                redirect(site_url('site/parts'));
+            }
+        } else {
+            redirect(site_url('site/login'));
+        }
+    }
+
+    function update_part_detail()
+    {
+        if ($this->session->userdata('isLoggedIn')) {
+            $id = $this->input->get('id');
+            if ($id != null) {
+                $result = $this->partdetail->get_detail($id);
+                if ($result != null) {
+                    $data['result'] = $result;
+                    $this->load->view('template/header');
+                    $this->load->view('template/sidebar');
+                    $this->load->view('update_part_detail', $data);
                     $this->load->view('template/footer');
                 } else {
                     redirect(site_url());
@@ -186,8 +229,28 @@ class Site extends CI_Controller
         }
     }
 
-    function testing()
+    function transactions()
     {
-        echo uniqid('TRN');
+        if ($this->session->userdata('isLoggedIn')) {
+            $data['transaction'] = $this->transaction->get_all();
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar');
+            $this->load->view('transactions', $data);
+            $this->load->view('template/footer');
+        } else {
+            redirect(site_url('site/login'));
+        }
+    }
+
+    function buat_laporan()
+    {
+        if ($this->session->userdata('isLoggedIn')) {
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar');
+            $this->load->view('buat_laporan');
+            $this->load->view('template/footer');
+        } else {
+            redirect(site_url('site/login'));
+        }
     }
 }

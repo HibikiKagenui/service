@@ -11,15 +11,14 @@ class User extends CI_Model
 
     function login($username, $password) {
         $this->db->select('*');
-        $this->db->where('username',$username);
-        $this->db->where('password',$password);
-        
-        $user = $this->db->get($this->table);
-        
-        if($user->num_rows() > 0) {
-            return $user;
+        $this->db->where('username', $username);
+        $this->db->where('password', $password);
+        $data = $this->db->get($this->table);
+
+        if ($data->num_rows() > 0) {
+            return $data->result();
         } else {
-            return FALSE;
+            return null;
         }
     }
 }

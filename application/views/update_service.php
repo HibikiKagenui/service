@@ -7,6 +7,8 @@
  */
 ?>
 <div class="col-md">
+    <div id="back-button"></div>
+    <hr>
     <h1><b>Ubah Data Layanan ID <?php echo $result[0]->id ?></b></h1>
     <form method="post" action="<?php echo site_url('process/update_service') ?>">
         <input type="text" name="id" value="<?php echo $result[0]->id ?>" hidden>

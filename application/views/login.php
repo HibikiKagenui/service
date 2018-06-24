@@ -1,4 +1,4 @@
-<div class="m-auto card col-md-8">
+<div class="m-auto card shadow-sm col-md-8">
 	<div class="p-5 m-3">
 		<h1 class="text-center">Login</h1>
 		<form method="POST" action="<?php echo site_url('process/login') ?>">

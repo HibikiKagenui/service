@@ -54,4 +54,74 @@ class Mechanic extends CI_Model
             return false;
         }
     }
+
+    function inc_jumlah_servis($id)
+    {
+        $this->db->set('jumlah_servis', 'jumlah_servis + 1', false);
+        $this->db->where('id', $id);
+        if ($this->db->update($this->table)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function dec_jumlah_servis($id)
+    {
+        $this->db->set('jumlah_servis', 'jumlah_servis - 1', false);
+        $this->db->where('id', $id);
+        if ($this->db->update($this->table)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function get_performance($id, $year)
+    {
+        $data = $this->db->query(
+            "SELECT a.bulan as bulan, IFNULL(b.jumlah,0) as jumlah
+                FROM (
+                        SELECT 'January' bulan
+                            UNION ALL
+                            SELECT 'February' bulan
+                            UNION ALL
+                            SELECT 'March' bulan
+                            UNION ALL
+                            SELECT 'April' bulan
+                            UNION ALL
+                            SELECT 'May' bulan
+                            UNION ALL
+                            SELECT 'June' bulan
+                            UNION ALL
+                            SELECT 'July' bulan
+                            UNION ALL
+                            SELECT 'August' bulan
+                            UNION ALL
+                            SELECT 'September' bulan
+                            UNION ALL
+                            SELECT 'October' bulan
+                            UNION ALL
+                            SELECT 'November' bulan
+                            UNION ALL
+                            SELECT 'December' bulan
+                    ) as a
+                LEFT JOIN (
+                        SELECT MONTHNAME(transactions.waktu_selesai) as bulan, count(service_transaction_details.id) as jumlah
+                            FROM mechanics, transactions, service_transaction_details
+                            WHERE mechanics.id = '" . $id . "'
+                            AND year(transactions.waktu_selesai) = '" . $year . "'
+                            AND service_transaction_details.xid_mechanic = mechanics.id
+                            AND service_transaction_details.xid_transaction = transactions.id
+                            GROUP BY month(transactions.waktu_selesai)
+                    )as b
+                ON a.bulan = b.bulan"
+        );
+
+        if ($data != null) {
+            return $data->result();
+        } else {
+            return null;
+        }
+    }
 }

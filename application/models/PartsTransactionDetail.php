@@ -13,9 +13,12 @@ class PartsTransactionDetail extends CI_Model
 
     function get($xid_transaction)
     {
+        $this->db->select('parts_transaction_details.*');
+        $this->db->select('parts.nama');
+        $this->db->from('parts_transaction_details, parts');
+        $this->db->where('parts.id', 'parts_transaction_details.xid_part', false);
         $this->db->where('xid_transaction', $xid_transaction);
-        $this->db->select('*');
-        $data = $this->db->get($this->table);
+        $data = $this->db->get();
 
         if ($data->num_rows() > 0) {
             return $data->result();
@@ -33,9 +36,15 @@ class PartsTransactionDetail extends CI_Model
         }
     }
 
-    function delete($xid_transaction)
+    function cancel($xid_transaction)
     {
         $this->db->where('xid_transaction', $xid_transaction);
+        $this->db->delete($this->table);
+    }
+
+    function delete($id)
+    {
+        $this->db->where('id', $id);
         $this->db->delete($this->table);
     }
 }

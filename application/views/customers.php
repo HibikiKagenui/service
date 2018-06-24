@@ -1,5 +1,6 @@
 <div class="col-md">
-    <h1><b>Tabel Pelanggan</b></h1>
+    <h3><b>Tabel Pelanggan</b></h3>
+    <hr>
     <table class="table table-bordered table-hover table-sm mt-3">
         <thead class="thead-dark">
         <tr>
@@ -33,6 +34,7 @@
                 </td>
                 <td>
                     <select class="form-control form-control-sm" name="gender">
+                        <option value="" hidden>Pilih</option>
                         <option value="L">L</option>
                         <option value="P">P</option>
                     </select>

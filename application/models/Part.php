@@ -23,6 +23,15 @@ class Part extends CI_Model
         }
     }
 
+    function insert($data)
+    {
+        if ($this->db->insert($this->table, $data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function get($id)
     {
         $this->db->select('*');
@@ -33,15 +42,6 @@ class Part extends CI_Model
             return $data->result();
         } else {
             return null;
-        }
-    }
-
-    function insert($data)
-    {
-        if ($this->db->insert($this->table, $data)) {
-            return true;
-        } else {
-            return false;
         }
     }
 
