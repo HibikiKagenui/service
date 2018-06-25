@@ -1,4 +1,4 @@
-<div class="col-md">
+<div id="content" class="container-fluid">
     <h3><b>Tabel Pelanggan</b></h3>
     <hr>
     <table class="table table-bordered table-hover table-sm mt-3">

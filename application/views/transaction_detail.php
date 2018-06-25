@@ -6,7 +6,7 @@
  * Time: 10:49 AM
  */
 ?>
-<div class="col-md">
+<div id="content" class="container-fluid">
     <div id="back-button"></div>
     <hr>
     <h3>Transaksi</h3>

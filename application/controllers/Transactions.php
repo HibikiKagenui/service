@@ -69,7 +69,7 @@ class Transactions extends CI_Controller
                 $jumlah = $this->input->post('jumlah');
 
                 // cek ketersediaan stok
-                if ($this->partdetail->check_stock($xid_part, $jumlah)) {
+                if ($this->part->check_stock($xid_part, $jumlah)) {
                     // ambil serial number part yang tersedia
                     $data = $this->partdetail->get_available($xid_part, $jumlah);
                     if ($data != null) {
@@ -178,5 +178,10 @@ class Transactions extends CI_Controller
         $this->session->unset_userdata('transactionOngoing');
         $this->session->unset_userdata('id');
         redirect(site_url());
+    }
+
+    function struk()
+    {
+        //
     }
 }

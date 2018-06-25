@@ -12,12 +12,17 @@
     <link href="<?php echo site_url('assets/css/select2.min.css') ?>" rel="stylesheet"/>
     <script src="<?php echo site_url('assets/js/select2.min.js') ?>"></script>
     <!-- Chart js -->
-    <script src="<?php echo site_url('assets/js/Chart.min.js')?>"></script>
+    <script src="<?php echo site_url('assets/js/Chart.min.js') ?>"></script>
     <!-- Custom -->
     <link rel="stylesheet" href="<?php echo site_url('assets/css/styles.css') ?>">
 </head>
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+    <?php if ($this->session->userdata('isLoggedIn')) { ?>
+        <button type="button" id="sidebarCollapse" class="btn btn-link">
+            <span class="fas fa-bars fa-2x"></span>
+        </button>
+    <?php } ?>
     <div class="navbar-header">
         <a class="navbar-brand" href="<?php echo site_url() ?>">
             <img src="<?php echo site_url('assets/img/logo.png') ?>" class="d-inline-block align-top" alt="">
@@ -39,4 +44,5 @@
     </div>
 <?php } ?>
 <div class="container-fluid p-4 m-auto">
-    <div class="row">
+    <div class="wrapper">
+

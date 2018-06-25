@@ -68,7 +68,7 @@
         });
     })
 </script>
-<div class="col-md">
+<div id="content" class="container-fluid">
     <h3><b>Menu Utama</b></h3>
     <hr>
     <h4><b>Buat Transaksi Baru</b></h4>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-lg btn-success">Buat</button>
+                    <button type="submit" class="btn btn-success">Buat</button>
                 </div>
             </form>
         </div>

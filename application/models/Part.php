@@ -54,4 +54,18 @@ class Part extends CI_Model
             return false;
         }
     }
+
+    function check_stock($id, $jumlah)
+    {
+        $this->db->select('stok');
+        $this->db->where('id', $id);
+
+        $data = $this->db->get($this->table);
+
+        if ($data->result()[0]->stok >= $jumlah) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

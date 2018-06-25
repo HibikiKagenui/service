@@ -79,17 +79,17 @@
             <div class="form-group col-md-6">
                 <label class="font-weight-bold" for="id">ID Transaksi</label>
                 <input type="text" class="form-control form-control-sm text-uppercase" name="id" id="id"
-                value="<?php echo $transaction[0]->id ?>" disabled>
+                       value="<?php echo $transaction[0]->id ?>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label class="font-weight-bold" for="jenis_kendaraan">Jenis Kendaraan</label>
                 <input type="text" class="form-control form-control-sm text-capitalize" name="jenis_kendaraan"
-                id="jenis_kendaraan" value="<?php echo $transaction[0]->jenis_kendaraan ?>" disabled>
+                       id="jenis_kendaraan" value="<?php echo $transaction[0]->jenis_kendaraan ?>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label class="font-weight-bold" for="nomor_polisi">Nomor Polisi</label>
                 <input type="text" class="form-control form-control-sm" name="nomor_polisi" id="nomor_polisi"
-                value="<?php echo $transaction[0]->nomor_polisi ?>" disabled>
+                       value="<?php echo $transaction[0]->nomor_polisi ?>" disabled>
             </div>
             <div class="form-group col-md-6">
                 <label class="font-weight-bold" for="xid_customer">ID Customer</label>
@@ -99,31 +99,74 @@
             <div class="form-group col-md-6">
                 <label class="font-weight-bold" for="keluhan">Keluhan</label>
                 <input type="text" class="form-control form-control-sm" name="keluhan" id="keluhan"
-                value="<?php echo $transaction[0]->keluhan ?>" disabled>
+                       value="<?php echo $transaction[0]->keluhan ?>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label class="font-weight-bold" for="waktu_mulai">Waktu Mulai</label>
                 <input type="text" class="form-control form-control-sm" name="waktu_mulai" id="waktu_mulai"
-                value="<?php echo $transaction[0]->waktu_mulai ?>" disabled>
+                       value="<?php echo $transaction[0]->waktu_mulai ?>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label class="font-weight-bold" for="kasir">Nama Kasir</label>
                 <input type="text" class="form-control form-control-sm" name="kasir" id="kasir"
-                value="<?php echo $this->session->userdata('nama') ?>" disabled>
+                       value="<?php echo $this->session->userdata('nama') ?>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label class="font-weight-bold" for="subtotal">Total</label>
                 <input type="text" class="form-control form-control-sm" name="subtotal" id="subtotal"
-                value="<?php echo $transaction[0]->total ?>" disabled>
+                       value="<?php echo $transaction[0]->total ?>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label class="font-weight-bold" for="dibayar">Bayar</label>
-                <input type="text" class="form-control form-control-sm" name="dibayar" id="dibayar" required>
+                <input type="text" class="form-control form-control-sm" name="dibayar" id="dibayar" value="0" required>
             </div>
         </div>
         <div class="text-right">
-            <input type="submit" class="btn btn-danger" name="action" value="Batal">
-            <input type="submit" class="btn btn-success" name="action" value="Selesai">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel">Batal</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#finish">Selesai</button>
+        </div>
+        <!-- Modal -->
+        <div class="modal" id="cancel" role="dialog" aria-labelledby="cancelLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cancelLabel">Batalkan transaksi?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Semua perubahan yang dilakukan transaksi ini akan hilang
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                        <input type="submit" class="btn btn-danger" name="action" value="Batal">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="finish" role="dialog" aria-labelledby="finishLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="finishLabel">Selesaikan transaksi?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Pastikan data transaksi sudah benar
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                        <input type="submit" class="btn btn-success" name="action" value="Selesai">
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
     <div class="my-3 card">
@@ -134,7 +177,7 @@
                     <option></option>
                 </select>
                 <input type="number" class="form-control form-control-sm mr-2" min="0" placeholder="Qty" name="jumlah"
-                value="1" required>
+                       value="1" required>
                 <input type="submit" class="btn btn-primary btn-sm" value="Tambah">
             </form>
             <?php if ($part_details != null) { ?>

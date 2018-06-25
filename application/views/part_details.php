@@ -6,7 +6,7 @@
  * Time: 9:21 PM
  */
 ?>
-<div class="col-md">
+<div id="content" class="container-fluid">
     <div id="back-button"></div>
     <hr>
     <h3><b>Tabel Detail Barang ID <?php echo $id ?></b></h3>

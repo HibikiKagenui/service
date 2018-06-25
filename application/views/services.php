@@ -1,4 +1,4 @@
-<div class="col-md">
+<div id="content" class="container-fluid">
     <h3><b>Tabel Layanan Jasa</b></h3>
     <hr>
     <div class="mt-3">

@@ -6,7 +6,7 @@
  * Time: 9:25 PM
  */
 ?>
-<div class="col-md">
+<div id="content" class="container-fluid">
     <h3><b>Tabel Data Histori Transaksi</b></h3>
     <hr>
     <div class="mt-3">
@@ -45,7 +45,9 @@
                         <td><?php echo $row->dibayar ?></td>
                         <td class="text-uppercase"><?php echo $row->status ?></td>
                         <td>
-                            <a class="btn btn-sm btn-success" title="Rincian" href="<?php echo site_url('transactions/detail?id=' . $row->id) ?>"><i class="fas fa-list-ol"></i></a>
+                            <a class="btn btn-sm btn-success" title="Rincian"
+                               href="<?php echo site_url('transactions/detail?id=' . $row->id) ?>"><i
+                                        class="fas fa-list-ol"></i></a>
                         </td>
                     </tr>
                 <?php }

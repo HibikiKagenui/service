@@ -62,20 +62,6 @@ class PartDetail extends CI_Model
         }
     }
 
-    function check_stock($xid_part, $jumlah)
-    {
-        $this->db->select('count(id) as qty');
-        $this->db->where('xid_part', $xid_part);
-
-        $data = $this->db->get($this->table);
-
-        if ($data->result()[0]->qty >= $jumlah) {
-            return true;
-        } else {
-            return null;
-        }
-    }
-
     function get_available($xid_part, $jumlah)
     {
         $this->db->select('parts.id');

@@ -6,7 +6,7 @@
  * Time: 12:01 PM
  */
 ?>
-<div class="col-md">
+<div id="content" class="container-fluid">
     <h3><b>Buat Laporan</b></h3>
     <hr>
     <form action="<?php echo site_url('process/laporan')?>" method="get" class="form-inline">

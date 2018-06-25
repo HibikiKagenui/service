@@ -6,7 +6,7 @@
  * Time: 7:52 PM
  */
 ?>
-<div class="col-md">
+<div id="content" class="container-fluid">
     <div id="back-button"></div>
     <hr>
     <h1><b>Ubah Data Suku Cadang ID <?php echo $result[0]->id ?></b></h1>

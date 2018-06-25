@@ -1,4 +1,4 @@
-<div class="col-md">
+<div id="content" class="container-fluid">
     <h3><b>Tabel Data Mekanik</b></h3>
     <hr>
     <div class="mt-3">
@@ -17,8 +17,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <form action="<?php echo site_url('process/insert_mechanic') ?>" method="post">
+            <form action="<?php echo site_url('process/insert_mechanic') ?>" method="post">
+                <tr>
                     <th scope="row"></th>
                     <td></td>
                     <td>
@@ -42,8 +42,8 @@
                     </td>
                     <td></td>
                     <td><input class="btn btn-sm btn-primary" type="submit" value="Tambah"></td>
-                </form>
-            </tr>
+                </tr>
+            </form>
             <?php
             $i = 1;
             if ($mechanic != null) {
@@ -58,12 +58,15 @@
                         <td><?php echo $row->gaji ?></td>
                         <td><?php echo $row->jumlah_servis ?></td>
                         <td>
-                            <a class="btn btn-sm btn-success" title="Kinerja"
-                               href="<?php echo site_url('mechanics/performance?id=' . $row->id . '&year=' . date('Y')) ?>"><span
-                                        class="fas fa-chart-line"></span></a>
-                            <a class="btn btn-sm btn-primary" title="Ubah"
-                               href="<?php echo site_url('site/update_mechanic?id=' . $row->id) ?>"><span
-                                        class="fas fa-edit"></span></a>
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-sm btn-success" title="Kinerja"
+                                   href="<?php echo site_url('mechanics/performance?id=' . $row->id . '&year=' . date('Y')) ?>"><span
+                                            class="fas fa-chart-line"></span></a>
+                                <a class="btn btn-sm btn-primary" title="Ubah"
+                                   href="<?php echo site_url('site/update_mechanic?id=' . $row->id) ?>"><span
+                                            class="fas fa-edit"></span></a>
+
+                            </div>
                         </td>
                     </tr>
                 <?php }

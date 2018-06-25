@@ -1,20 +1,29 @@
 /*
 Navbar animation
  */
-$(document).ready(function () {
-    /*
-    Drop shadow effect on navbar after scrolling
-     */
-    $(window).on('scroll', function () {
-        if (!$(document).scrollTop()) {
-            // At top of page.
-            $('.navbar').removeClass('shrink').removeClass('shadow-sm');
-        } else {
-            // Not at top of page.
-            $('.navbar').addClass('shrink').addClass('shadow-sm');
-        }
-    });
-});
+$(document).ready(
+    function () {
+        /*
+        Drop shadow effect on navbar after scrolling
+         */
+        $(window).on('scroll', function () {
+            if (!$(document).scrollTop()) {
+                // At top of page.
+                $('.navbar').removeClass('shrink').removeClass('shadow-sm');
+            } else {
+                // Not at top of page.
+                $('.navbar').addClass('shrink').addClass('shadow-sm');
+            }
+        });
+
+        /*
+        Toggle sidebar visibility
+         */
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    }
+);
 
 /*
 Creating back button to add to div#backbutton

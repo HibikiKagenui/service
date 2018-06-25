@@ -1,4 +1,4 @@
-<div class="col-md-2">
+<nav id="sidebar">
     <h4><b>Welcome,<br><?php echo $this->session->userdata('nama') ?></b></h4>
     <ul class="nav flex-column">
         <li class="nav-item">
@@ -30,4 +30,4 @@
             <a class="nav-link" href="<?php echo site_url('process/logout') ?>">Keluar</a>
         </li>
     </ul>
-</div>
+</nav>

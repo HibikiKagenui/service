@@ -6,7 +6,7 @@
  * Time: 6:15 PM
  */
 ?>
-<div class="col-md">
+<div id="content" class="container-fluid">
     <a href="<?php echo site_url('site/mechanics')?>" class="btn btn-primary">
         <span class="fas fa-chevron-left"></span> Kembali
     </a>
@@ -36,7 +36,7 @@
                 datasets: [{
                     label: "Jumlah servis",
                     // backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    borderColor: '#E95420',
                     data: <?php echo json_encode($jumlah) ?>,
                 }]
             },
