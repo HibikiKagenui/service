@@ -25,7 +25,7 @@
     <?php } ?>
     <div class="navbar-header">
         <a class="navbar-brand" href="<?php echo site_url() ?>">
-            <img src="<?php echo site_url('assets/img/logo.png') ?>" class="d-inline-block align-top" alt="">
+            <img src="<?php echo site_url('assets/img/logo.png') ?>" class="d-inline-block align-top" alt="Logo">
         </a>
     </div>
 </nav>

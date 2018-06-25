@@ -73,7 +73,7 @@
     <hr>
     <h4><b>Buat Transaksi Baru</b></h4>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <form action="<?php echo site_url('process/new_transaction') ?>" method="post">
                 <div class="form-check text-right my-2">
                     <input type="checkbox" class="form-check-input" name="awanama" id="awanama" value="true"
