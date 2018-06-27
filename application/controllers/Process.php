@@ -296,6 +296,8 @@ class Process extends CI_Controller
         $status = 'pending';
         // get id customer
         $xid_customer = $this->input->post('id');
+        // username kasir
+        $username_kasir = $this->session->userdata('username');
 
         $data = [
             'id' => $id,
@@ -306,7 +308,8 @@ class Process extends CI_Controller
             'waktu_mulai' => $waktu_mulai,
             'total' => $total,
             'status' => $status,
-            'xid_customer' => $xid_customer
+            'xid_customer' => $xid_customer,
+            'username_kasir' => $username_kasir
         ];
 
         // insert
@@ -331,14 +334,21 @@ class Process extends CI_Controller
         $year = $this->input->get('year');
 
         $this->load->model('laporan');
+        // metadata
         $data['month'] = $month;
         $data['year'] = $year;
+
+        date_default_timezone_set('Asia/Jakarta');
         $data['creation_time'] = date('Y-m-d H:i:s', time());
+        // transaction data
         $data['master'] = $this->laporan->get_master($month, $year);
         $data['part_details'] = $this->laporan->get_part_details($month, $year);
         $data['service_details'] = $this->laporan->get_service_details($month, $year);
+        // part detail log data
+        $data['part_detail_log'] = $this->laporan->get_part_detail_log($month, $year);
+        // transaction cancelation data
+        $data['transaction_cancelations'] = $this->laporan->get_transaction_cancelations($month, $year);
 
-//        $this->output->set_content_type('application/json')->set_output($data);
         $this->load->view('laporan', $data);
     }
 }

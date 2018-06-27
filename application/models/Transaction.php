@@ -45,12 +45,45 @@ class Transaction extends CI_Model
         }
     }
 
-    function done($id, $dibayar)
+    function done($id, $dibayar, $keterangan)
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->db->set('status', 'done');
         $this->db->set('waktu_selesai', date('Y-m-d H:i:s', time()));
+        $this->db->set('keterangan', $keterangan);
         $this->db->set('dibayar', $dibayar);
+        $this->db->where('id', $id);
+        $this->db->update($this->table);
+    }
+
+    function cancel($id, $keterangan)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $this->db->set('status', 'canceled');
+        $this->db->set('waktu_selesai', date('Y-m-d H:i:s', time()));
+        $this->db->set('keterangan', $keterangan);
+        $this->db->where('id', $id);
+        $this->db->update($this->table);
+    }
+
+    function submit_for_cancelation($id)
+    {
+        $this->db->set('status', 'waiting approval');
+        $this->db->where('id', $id);
+        $this->db->update($this->table);
+    }
+
+    function approve_cancelation($id, $keterangan)
+    {
+        $this->db->set('status', 'canceled');
+        $this->db->set('keterangan', $keterangan);
+        $this->db->where('id', $id);
+        $this->db->update($this->table);
+    }
+
+    function reject_cancelation($id)
+    {
+        $this->db->set('status', 'done');
         $this->db->where('id', $id);
         $this->db->update($this->table);
     }
@@ -60,6 +93,7 @@ class Transaction extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete($this->table);
     }
+
 
     function inc_total($biaya, $id)
     {

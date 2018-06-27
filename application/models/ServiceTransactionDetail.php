@@ -29,6 +29,20 @@ class ServiceTransactionDetail extends CI_Model
         }
     }
 
+    function get_subtotal($xid_transaction)
+    {
+        $this->db->select('sum(biaya) as subtotal');
+        $this->db->where('xid_transaction', $xid_transaction);
+        $data = $this->db->get($this->table);
+
+        if ($data->num_rows() > 0) {
+            return $data->result()[0]->subtotal;
+        } else {
+            return null;
+        }
+    }
+
+
     function insert($data)
     {
         if ($this->db->insert($this->table, $data)) {

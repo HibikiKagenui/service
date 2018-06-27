@@ -12,7 +12,7 @@
 				<input type="password" class="form-control" placeholder="password" name="password" id="Password">
 			</div>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                <button type="submit" class="btn btn-primary">Login</button>
             </div>
 		</form>
 	</div>

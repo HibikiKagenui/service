@@ -25,8 +25,51 @@
     <h3 class="text-center">Laporan Transaksi Penjualan dan Servis Auto-Correct</h3>
     <table>
         <tr>
-            <td>Bulan dan tahun</td>
-            <td>: <?php echo $month . '-' . $year ?></td>
+            <td>Rentang Waktu</td>
+            <td>: <?php
+                if (isset($month)) {
+                    switch ($month) {
+                        case 1:
+                            echo 'Januari';
+                            break;
+                        case 2:
+                            echo 'Februari';
+                            break;
+                        case 3:
+                            echo 'Maret';
+                            break;
+                        case 4:
+                            echo 'April';
+                            break;
+                        case 5:
+                            echo 'Mei';
+                            break;
+                        case 6:
+                            echo 'Juni';
+                            break;
+                        case 7:
+                            echo 'Juli';
+                            break;
+                        case 8:
+                            echo 'Agustus';
+                            break;
+                        case 9:
+                            echo 'September';
+                            break;
+                        case 10:
+                            echo 'Oktober';
+                            break;
+                        case 11:
+                            echo 'November';
+                            break;
+                        case 12:
+                            echo 'Desember';
+                            break;
+                    }
+                    echo ' ';
+                }
+                echo $year
+                ?></td>
         </tr>
         <tr>
             <td>Dibuat pada</td>
@@ -35,15 +78,19 @@
     </table>
     <br>
     <h5>Tabel Transaksi Keseluruhan</h5>
-    <table border="1">
+    <table border="1" cellpadding="3">
         <thead>
         <tr>
             <th>No.</th>
             <th>ID Transaksi</th>
             <th>ID Pelanggan</th>
             <th>Nama Pelanggan</th>
+            <th>Kasir</th>
             <th>Hanya Pembelian</th>
+            <th>Keluhan</th>
             <th>Tanggal Selesai</th>
+            <th>Status</th>
+            <th>Keterangan</th>
             <th>Subtotal Jasa Servis</th>
             <th>Subtotal Penjualan Suku Cadang</th>
             <th>TOTAL</th>
@@ -59,12 +106,16 @@
                     <td><?php echo $row->id ?></td>
                     <td><?php echo $row->id_pelanggan ?></td>
                     <td><?php echo $row->nama_pelanggan ?></td>
+                    <td><?php echo $row->username_kasir ?></td>
                     <td><?php if ($row->hanya_pembelian == 1) echo 'Ya'; else echo 'Tidak'; ?></td>
+                    <td><?php echo $row->keluhan ?></td>
                     <td><?php echo $row->waktu_selesai ?></td>
-                    <td><?php echo $row->subtotal_pembelian ?></td>
-                    <td><?php echo $row->subtotal_servis ?></td>
-                    <td><?php echo 'Rp ' . number_format($row->total,2,',','.') ?></td>
-                    <td><?php echo 'Rp ' . number_format($row->dibayar,2,',','.') ?></td>
+                    <td><?php echo $row->status ?></td>
+                    <td><?php echo $row->keterangan ?></td>
+                    <td class="text-right"><?php echo $row->subtotal_pembelian ?></td>
+                    <td class="text-right"><?php echo $row->subtotal_servis ?></td>
+                    <td class="text-right"><?php echo number_format($row->total, 2, ',', '.') ?></td>
+                    <td class="text-right"><?php echo number_format($row->dibayar, 2, ',', '.') ?></td>
                 </tr>
             <?php }
         } ?>
@@ -72,7 +123,7 @@
     </table>
     <br>
     <h5>Tabel Transaksi Penjualan</h5>
-    <table border="1">
+    <table border="1" cellpadding="3">
         <thead>
         <tr>
             <th>No.</th>
@@ -93,7 +144,7 @@
                     <td><?php echo $row->xid_part ?></td>
                     <td><?php echo $row->nama ?></td>
                     <td><?php echo $row->part_serial_num ?></td>
-                    <td><?php echo 'Rp ' . number_format($row->harga,2,',','.') ?></td>
+                    <td class="text-right"><?php echo number_format($row->harga, 2, ',', '.') ?></td>
                 </tr>
             <?php }
         } ?>
@@ -101,7 +152,7 @@
     </table>
     <br>
     <h5>Tabel Transaksi Servis</h5>
-    <table border="1">
+    <table border="1" cellpadding="3">
         <thead>
         <tr>
             <th>No.</th>
@@ -124,7 +175,65 @@
                     <td><?php echo $row->nama_servis ?></td>
                     <td><?php echo $row->xid_mechanic ?></td>
                     <td><?php echo $row->nama_mekanik ?></td>
-                    <td><?php echo 'Rp ' . number_format($row->biaya,2,',','.') ?></td>
+                    <td class="text-right"><?php echo number_format($row->biaya, 2, ',', '.') ?></td>
+                </tr>
+            <?php }
+        } ?>
+        </tbody>
+    </table>
+    <br>
+    <h5>Tabel Catatan Stok Suku Cadang</h5>
+    <table border="1" cellpadding="3">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>ID Part</th>
+            <th>Nomor Seri</th>
+            <th>Waktu</th>
+            <th>Keterangan</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if ($part_detail_log != null) {
+            $i = 1;
+            foreach ($part_detail_log as $row) { ?>
+                <tr>
+                    <td><?php echo $i++ ?></td>
+                    <td><?php echo $row->xid_part ?></td>
+                    <td><?php echo $row->part_serial_num ?></td>
+                    <td><?php echo $row->waktu ?></td>
+                    <td><?php echo $row->keterangan ?></td>
+                </tr>
+            <?php }
+        } ?>
+        </tbody>
+    </table>
+    <br>
+    <h5>Tabel Data Pengajuan Pembatalan Transaksi</h5>
+    <table border="1" cellpadding="3">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>ID Transaksi</th>
+            <th>Kasir</th>
+            <th>Alasan</th>
+            <th>Status</th>
+            <th>Waktu Pengajuan</th>
+            <th>Waktu Acc</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if ($transaction_cancelations != null) {
+            $i = 1;
+            foreach ($transaction_cancelations as $row) { ?>
+                <tr>
+                    <td><?php echo $i++ ?></td>
+                    <td><?php echo $row->xid_transaction ?></td>
+                    <td><?php echo $row->username_kasir ?></td>
+                    <td><?php echo $row->alasan ?></td>
+                    <td><?php echo $row->status?></td>
+                    <td><?php echo $row->submission_time ?></td>
+                    <td><?php echo $row->accepted_time ?></td>
                 </tr>
             <?php }
         } ?>

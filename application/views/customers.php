@@ -30,7 +30,8 @@
                               name="alamat"></textarea>
                 </td>
                 <td>
-                    <input class="form-control form-control-sm" type="text" placeholder="Nomor Telpon" name="no_kontak">
+                    <input class="form-control form-control-sm" type="text" placeholder="Nomor Telpon"
+                           name="no_kontak">
                 </td>
                 <td>
                     <select class="form-control form-control-sm" name="gender">
@@ -57,10 +58,9 @@
                     <td><?php echo $row->no_kontak ?></td>
                     <td><?php echo $row->gender ?></td>
                     <td>
-                        <!--<a class="btn btn-sm btn-success" title="Transaksi Baru" href="-->
-                        <?php //echo site_url('process/new_transaction?id='.$row->id) ?><!--"><i class="fas fa-shopping-cart"></i></a>-->
-                        <a class="btn btn-sm btn-primary" title="Ubah" href="<?php echo site_url('site/update_customer?id='.$row->id)?>"><i class="fas fa-edit"></i></a>
-                        <!-- <a class="btn btn-danger" href=""><i class="fas fa-trash-alt"></i></a> -->
+                        <a class="btn btn-sm btn-primary" title="Ubah"
+                           href="<?php echo site_url('site/update_customer?id=' . $row->id) ?>"><i
+                                    class="fas fa-edit"></i></a>
                     </td>
                 </tr>
             <?php }

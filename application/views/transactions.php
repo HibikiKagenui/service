@@ -16,9 +16,7 @@
                 <th scope="col">#</th>
                 <th scope="col">ID Transaksi</th>
                 <th scope="col">ID Pelanggan</th>
-                <th scope="col">Jenis Kendaraan</th>
-                <th scope="col">Nomor Polisi</th>
-                <th scope="col">Keluhan</th>
+                <th scope="col">Hanya Pembelian?</th>
                 <th scope="col">Mulai</th>
                 <th scope="col">Selesai</th>
                 <th scope="col">Total</th>
@@ -36,18 +34,53 @@
                         <th scope="row"><?php echo $i++ ?></th>
                         <td class="text-uppercase"><?php echo $row->id ?></td>
                         <td class="text-uppercase"><?php echo $row->xid_customer ?></td>
-                        <td class="text-capitalize"><?php echo $row->jenis_kendaraan ?></td>
-                        <td><?php echo $row->nomor_polisi ?></td>
-                        <td><?php echo $row->keluhan ?></td>
+                        <td><?php if ($row->hanya_pembelian == 1) echo 'Ya'; else echo 'Tidak' ?></td>
                         <td><?php echo $row->waktu_mulai ?></td>
                         <td><?php echo $row->waktu_selesai ?></td>
-                        <td><?php echo $row->total ?></td>
-                        <td><?php echo $row->dibayar ?></td>
-                        <td class="text-uppercase"><?php echo $row->status ?></td>
+                        <td class="text-right"><?php echo $row->total ?></td>
+                        <td class="text-right"><?php echo $row->dibayar ?></td>
+                        <!--                        <td class="text-right">-->
+                        <?php //echo 'Rp ' . number_format($row->total,2,',','.') ?><!--</td>-->
+                        <!--                        <td class="text-right">-->
+                        <?php //echo 'Rp ' . number_format($row->dibayar,2,',','.') ?><!--</td>-->
+                        <td class="text-uppercase">
+                            <?php
+                            switch ($row->status) {
+                                case 'done':
+                                    echo '<span class="text-success">Done</span>';
+                                    break;
+                                case 'pending':
+                                    echo '<span class="text-warning">PENDING</span>';
+                                    break;
+                                case 'canceled':
+                                    echo '<span class="text-danger">CANCELED</span>';
+                                    break;
+                                case 'waiting approval':
+                                    echo '<span class="text-info">WAITING APPROVAL</span>';
+                                    break;
+                            }
+                            ?>
+                        </td>
                         <td>
-                            <a class="btn btn-sm btn-success" title="Rincian"
-                               href="<?php echo site_url('transactions/detail?id=' . $row->id) ?>"><i
-                                        class="fas fa-list-ol"></i></a>
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-success" title="Rincian"
+                                   href="<?php echo site_url('transactions/detail?id=' . $row->id) ?>"><span
+                                            class="fas fa-list"></span></a>
+                                <?php if ($row->status == 'done' || $row->status == 'waiting approval') { ?>
+                                    <a class="btn btn-sm btn-light" title="Cetak struk"
+                                       href="<?php echo site_url('transactions/struk?id=' . $row->id) ?>"
+                                       target="_blank"><i
+                                                class="fas fa-print"></i></a>
+                                    <?php if ($this->session->userdata('jabatan') == 'kasir') { ?>
+                                        <?php if ($row->status == 'done') { ?>
+                                            <a class="btn btn-sm btn-danger" title="Ajukan pembatalan"
+                                               href="<?php echo site_url('transactions/cancelation?id=' . $row->id) ?>"
+                                               target="_blank"><i
+                                                        class="fas fa-undo"></i></a>
+                                        <?php } ?>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
                         </td>
                     </tr>
                 <?php }

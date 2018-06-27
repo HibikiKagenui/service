@@ -16,7 +16,7 @@ class Mechanics extends CI_Controller
 
     function performance()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') == 'manajer') {
             $id = $this->input->get('id');
             $year = $this->input->get('year');
             if ($id != null && $year != null) {

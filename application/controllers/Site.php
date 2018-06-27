@@ -12,6 +12,7 @@ class Site extends CI_Controller
         $this->load->model('service');
         $this->load->model('mechanic');
         $this->load->model('transaction');
+        $this->load->model('transactioncancelation');
     }
 
     function index()
@@ -58,7 +59,7 @@ class Site extends CI_Controller
 
     function update_customer()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') == 'admin') {
             $id = $this->input->get('id');
             if ($id != null) {
                 $result = $this->customer->get($id);
@@ -81,7 +82,7 @@ class Site extends CI_Controller
 
     function parts()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') != 'kasir') {
             $data['part'] = $this->part->get_all();
             $this->load->view('template/header');
             $this->load->view('template/sidebar');
@@ -94,7 +95,7 @@ class Site extends CI_Controller
 
     function update_part()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') == 'admin') {
             $id = $this->input->get('id');
             if ($id != null) {
                 $result = $this->part->get($id);
@@ -117,7 +118,7 @@ class Site extends CI_Controller
 
     function part_details()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') == 'admin') {
             $id = $this->input->get('id');
             if ($id != null) {
                 $data['part'] = $this->partdetail->get($id);
@@ -136,7 +137,7 @@ class Site extends CI_Controller
 
     function update_part_detail()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') == 'admin') {
             $id = $this->input->get('id');
             if ($id != null) {
                 $result = $this->partdetail->get_detail($id);
@@ -159,7 +160,7 @@ class Site extends CI_Controller
 
     function services()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') != 'kasir') {
             $data['service'] = $this->service->get_all();
             $this->load->view('template/header');
             $this->load->view('template/sidebar');
@@ -172,7 +173,7 @@ class Site extends CI_Controller
 
     function update_service()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') == 'admin') {
             $id = $this->input->get('id');
             if ($id != null) {
                 $result = $this->service->get($id);
@@ -195,7 +196,7 @@ class Site extends CI_Controller
 
     function mechanics()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') != 'kasir') {
             $data['mechanic'] = $this->mechanic->get_all();
             $this->load->view('template/header');
             $this->load->view('template/sidebar');
@@ -208,7 +209,7 @@ class Site extends CI_Controller
 
     function update_mechanic()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') == 'admin') {
             $id = $this->input->get('id');
             if ($id != null) {
                 $result = $this->mechanic->get($id);
@@ -244,10 +245,23 @@ class Site extends CI_Controller
 
     function buat_laporan()
     {
-        if ($this->session->userdata('isLoggedIn')) {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') == 'manajer') {
             $this->load->view('template/header');
             $this->load->view('template/sidebar');
             $this->load->view('buat_laporan');
+            $this->load->view('template/footer');
+        } else {
+            redirect(site_url('site/login'));
+        }
+    }
+
+    function transaction_cancelations()
+    {
+        if ($this->session->userdata('isLoggedIn') && $this->session->userdata('jabatan') == 'manajer') {
+            $data['transaction_cancelations'] = $this->transactioncancelation->get_all();
+            $this->load->view('template/header');
+            $this->load->view('template/sidebar');
+            $this->load->view('transaction_cancelations', $data);
             $this->load->view('template/footer');
         } else {
             redirect(site_url('site/login'));

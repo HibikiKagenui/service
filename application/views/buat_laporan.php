@@ -9,7 +9,7 @@
 <div id="content" class="container-fluid">
     <h3><b>Buat Laporan</b></h3>
     <hr>
-    <form action="<?php echo site_url('process/laporan')?>" method="get" class="form-inline">
+    <form action="<?php echo site_url('process/laporan')?>" method="get" class="form-inline" target="_blank">
         <div class="form-group mr-2">
             <label for="month">Bulan:</label>
             <select type="number" name="month" id="month" class="form-control ml-2">

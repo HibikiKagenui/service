@@ -41,13 +41,6 @@ backbutton.appendChild(document.createTextNode(" Kembali"));
 document.getElementById("back-button").appendChild(backbutton);
 
 /*
-Close (hide) message box
-*/
-function closeMessage() {
-    document.getElementById('message-box').hidden = true;
-}
-
-/*
 checkbox
  */
 function onChecked(awanama) {

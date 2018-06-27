@@ -32,14 +32,12 @@
 <br><br>
 <br><br><br>
 <?php if ($this->session->flashdata('message') != null) { ?>
-    <div class="row mt-3" id="message-box">
-        <div class="col-md-3 m-auto">
-            <div class="card shadow-sm text-center">
-                <div class="my-3 h6 text-danger">
-                    <?php echo $this->session->flashdata('message') ?>
-                </div>
-                <button class="btn btn-primary" onclick="closeMessage()"><span class="fas fa-times"></span></button>
-            </div>
+    <div class="col-md-6 mx-auto mt-3">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php echo $this->session->flashdata('message') ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     </div>
 <?php } ?>

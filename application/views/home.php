@@ -71,53 +71,55 @@
 <div id="content" class="container-fluid">
     <h3><b>Menu Utama</b></h3>
     <hr>
-    <h4><b>Buat Transaksi Baru</b></h4>
     <div class="row">
-        <div class="col-md-7">
-            <form action="<?php echo site_url('process/new_transaction') ?>" method="post">
-                <div class="form-check text-right my-2">
-                    <input type="checkbox" class="form-check-input" name="awanama" id="awanama" value="true"
-                           onclick="onChecked(this)">
-                    <label class="form-check-label" for="awanama">Hanya pembelian</label>
-                </div>
-                <div class="form-group row">
-                    <label for="id" class="col-md-3 col-form-label">Pelanggan</label>
-                    <div class="col-md">
-                        <select class="form-control" name="id" id="id">
-                            <option></option>
-                        </select>
+        <?php if ($this->session->userdata('jabatan') != 'admin') { ?>
+            <div class="col-md-7">
+                <h4><b>Buat Transaksi Baru</b></h4>
+                <form action="<?php echo site_url('process/new_transaction') ?>" method="post" target="_blank">
+                    <div class="form-check text-right my-2">
+                        <input type="checkbox" class="form-check-input" name="awanama" id="awanama" value="true"
+                               onclick="onChecked(this)">
+                        <label class="form-check-label" for="awanama">Hanya pembelian</label>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="jenis_kendaraan" class="col-md-3 col-form-label">Jenis Kendaraan</label>
-                    <div class="col-md">
-                        <select class="form-control" name="jenis_kendaraan" id="jenis_kendaraan">
-                            <option></option>
-                            <option value="mobil">Mobil</option>
-                            <option value="motor">Motor</option>
-                            <option value="truk">Truk</option>
-                        </select>
+                    <div class="form-group row">
+                        <label for="id" class="col-md-3 col-form-label">Pelanggan</label>
+                        <div class="col-md">
+                            <select class="form-control" name="id" id="id">
+                                <option></option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="nomor_polisi" class="col-md-3 col-form-label">Nomor Polisi</label>
-                    <div class="col-md">
-                        <input type="text" class="form-control" name="nomor_polisi" id="nomor_polisi"
-                               placeholder="Nomor Polisi">
+                    <div class="form-group row">
+                        <label for="jenis_kendaraan" class="col-md-3 col-form-label">Jenis Kendaraan</label>
+                        <div class="col-md">
+                            <select class="form-control" name="jenis_kendaraan" id="jenis_kendaraan">
+                                <option></option>
+                                <option value="mobil">Mobil</option>
+                                <option value="motor">Motor</option>
+                                <option value="truk">Truk</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="keluhan" class="col-md-3 col-form-label">Keluhan</label>
-                    <div class="col-md">
+                    <div class="form-group row">
+                        <label for="nomor_polisi" class="col-md-3 col-form-label">Nomor Polisi</label>
+                        <div class="col-md">
+                            <input type="text" class="form-control" name="nomor_polisi" id="nomor_polisi"
+                                   placeholder="Nomor Polisi">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="keluhan" class="col-md-3 col-form-label">Keluhan</label>
+                        <div class="col-md">
                     <textarea name="keluhan" id="keluhan" rows="2" class="form-control"
                               placeholder="Keluhan"></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="text-right">
-                    <button type="submit" class="btn btn-success">Buat</button>
-                </div>
-            </form>
-        </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-success">Buat</button>
+                    </div>
+                </form>
+            </div>
+        <?php } ?>
         <div class="col-md">
             <div style="text-align:center;padding:1em 0;"><h2><a style="text-decoration:none;"
                                                                  href="https://www.zeitverschiebung.net/en/city/1650357"><span

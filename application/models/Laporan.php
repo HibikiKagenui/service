@@ -18,7 +18,7 @@ class Laporan extends CI_Model
         $data = $this->db->query("
             SELECT a.*, ifnull(b.subtotal_pembelian,0) AS subtotal_pembelian, ifnull(c.subtotal_servis,0) AS subtotal_servis FROM 
             (
-                SELECT transactions.id, transactions.xid_customer AS id_pelanggan, customers.nama AS nama_pelanggan, transactions.hanya_pembelian, transactions.waktu_selesai, transactions.total, transactions.dibayar
+                SELECT transactions.id, transactions.xid_customer AS id_pelanggan, customers.nama AS nama_pelanggan, transactions.hanya_pembelian, transactions.keluhan, transactions.waktu_selesai, transactions.total, transactions.dibayar, transactions.status, transactions.keterangan, transactions.username_kasir
                 FROM transactions, customers
                 WHERE transactions.xid_customer = customers.id 
                 AND month(transactions.waktu_selesai) = '" . $month . "' 
@@ -32,6 +32,7 @@ class Laporan extends CI_Model
             (
               SELECT xid_transaction, sum(biaya) AS subtotal_servis FROM service_transaction_details GROUP BY xid_transaction
             ) AS c ON a.id = c.xid_transaction
+            ORDER BY a.waktu_selesai ASC
         ");
 
         if ($data != null) {
@@ -71,6 +72,34 @@ class Laporan extends CI_Model
         $this->db->where('month(transactions.waktu_selesai)', $month);
         $this->db->where('year(transactions.waktu_selesai)', $year);
         $data = $this->db->get();
+
+        if ($data->num_rows() > 0) {
+            return $data->result();
+        } else {
+            return null;
+        }
+    }
+
+    function get_part_detail_log($month, $year)
+    {
+        $this->db->select('*');
+        $this->db->where('month(waktu)', $month);
+        $this->db->where('year(waktu)', $year);
+        $data = $this->db->get('part_detail_log');
+
+        if ($data->num_rows() > 0) {
+            return $data->result();
+        } else {
+            return null;
+        }
+    }
+
+    function get_transaction_cancelations($month, $year)
+    {
+        $this->db->select('*');
+        $this->db->where('month(accepted_time)', $month);
+        $this->db->where('year(accepted_time)', $year);
+        $data = $this->db->get('transaction_cancelations');
 
         if ($data->num_rows() > 0) {
             return $data->result();

@@ -27,6 +27,19 @@ class PartsTransactionDetail extends CI_Model
         }
     }
 
+    function get_subtotal($xid_transaction)
+    {
+        $this->db->select('sum(harga) as subtotal');
+        $this->db->where('xid_transaction', $xid_transaction);
+        $data = $this->db->get($this->table);
+
+        if ($data->num_rows() > 0) {
+            return $data->result()[0]->subtotal;
+        } else {
+            return null;
+        }
+    }
+
     function insert($data)
     {
         if ($this->db->insert($this->table, $data)) {
@@ -34,12 +47,6 @@ class PartsTransactionDetail extends CI_Model
         } else {
             return false;
         }
-    }
-
-    function cancel($xid_transaction)
-    {
-        $this->db->where('xid_transaction', $xid_transaction);
-        $this->db->delete($this->table);
     }
 
     function delete($id)

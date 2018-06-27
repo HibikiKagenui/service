@@ -17,14 +17,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo site_url('site/mechanics') ?>">Data Mekanik</a>
             </li>
+        <?php } ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url('site/transactions') ?>">Data Histori Transkasi</a>
+        </li>
+        <?php if ($this->session->userdata('jabatan') == 'manajer') { ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url('site/transactions') ?>">Data Histori Transkasi</a>
+                <a class="nav-link" href="<?php echo site_url('site/transaction_cancelations') ?>">Data Pengajuan Pembatalan Transaksi</a>
             </li>
-            <?php if ($this->session->userdata('jabatan') == 'manajer') { ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo site_url('site/buat_laporan') ?>">Buat Laporan</a>
-                </li>
-            <?php } ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo site_url('site/buat_laporan') ?>">Buat Laporan</a>
+            </li>
         <?php } ?>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('process/logout') ?>">Keluar</a>
